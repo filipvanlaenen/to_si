@@ -15,28 +15,44 @@
 # You can find a copy of the GNU General Public License in /doc/gpl.txt
 #
 
-class Fixnum
+require 'singleton'
 
-	def to_3e
-		if (self < 1000)
-			return self.to_s
+class To3e
+
+	include Singleton
+
+	def to_3e(number)
+		if (number < 1000)
+			return number.to_s
 		else
-			return self.to_3kilo
+			return to_3e_with_unit(number)
 		end
 	end
 	
-	def to_3kilo
-		rescaled_self = self.to_f / 1000.to_f
-		if (rescaled_self < 9.995)
-			precision = 2
-		elsif (rescaled_self < 99.95)
-			precision = 1
-		else
-			precision = 0
-		end
-		value = "%.#{precision}f" % rescaled_self 
+	def to_3e_with_unit(number)
+		rescaled_number = number.to_f / 1000.to_f
+		precision = calculate_precision(rescaled_number) 
+		value = "%.#{precision}f" % rescaled_number 
 		unit = 'k'
 		return "#{value}#{unit}"
 	end
+	
+	def calculate_precision(rescaled_number)
+		if (rescaled_number < 9.995)
+			return 2
+		elsif (rescaled_number < 99.95)
+			return 1
+		else
+			return 0
+		end
+	end
 
+end
+
+class Fixnum
+
+	def to_3e
+		To3e.instance.to_3e(self)
+	end
+	
 end
