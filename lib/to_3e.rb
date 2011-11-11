@@ -20,6 +20,8 @@ require 'singleton'
 class To3e
 
 	include Singleton
+	
+	Units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
 
 	def to_3e(number)
 		if (number < 1000)
@@ -30,10 +32,15 @@ class To3e
 	end
 	
 	def to_3e_with_unit(number)
-		rescaled_number = number.to_f / 1000.to_f
+		scale = 0
+		rescaled_number = number.to_f
+		until (rescaled_number < 999.5) do
+			rescaled_number = rescaled_number / 1000.to_f
+			scale += 1
+		end
 		precision = calculate_precision(rescaled_number) 
 		value = "%.#{precision}f" % rescaled_number 
-		unit = 'k'
+		unit = Units[scale - 1]
 		return "#{value}#{unit}"
 	end
 	
@@ -49,7 +56,7 @@ class To3e
 
 end
 
-class Fixnum
+class Integer
 
 	def to_3e
 		To3e.instance.to_3e(self)
