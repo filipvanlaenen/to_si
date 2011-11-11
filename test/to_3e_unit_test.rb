@@ -19,7 +19,7 @@ require 'to_3e'
 require 'test/unit'
 
 #
-# Unit tests on to_3e.
+# Unit tests on To3e. The tests run against Integer, not directly on To3e.
 #
 class To3eUnitTest < Test::Unit::TestCase
 	
