@@ -27,4 +27,36 @@ class To3eUnitTest < Test::Unit::TestCase
 		assert_equal '0', 0.to_3e
 	end
 	
+	def test_must_round_999
+		assert_equal '999', 999.to_3e
+	end
+
+	def test_must_round_1000_to_1_00k
+		assert_equal '1.00k', 1000.to_3e
+	end
+	
+	def test_must_round_9994_to_9_99k
+		assert_equal '9.99k', 9994.to_3e
+	end
+	
+	def test_must_round_9995_to_10_0k
+		assert_equal '10.0k', 9995.to_3e
+	end
+	
+	def test_must_round_99949_to_99_9k
+		assert_equal '99.9k', 99949.to_3e
+	end
+
+	def test_must_round_99950_to_100k
+		assert_equal '100k', 99950.to_3e
+	end
+
+	def test_must_round_999499_to_999k
+		assert_equal '999k', 999499.to_3e
+	end
+
+	def test_must_round_999500_to_1_00M
+		assert_equal '1.00M', 999500.to_3e
+	end
+
 end

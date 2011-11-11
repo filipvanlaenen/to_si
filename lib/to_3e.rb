@@ -18,7 +18,25 @@
 class Fixnum
 
 	def to_3e
-		return '0'
+		if (self < 1000)
+			return self.to_s
+		else
+			return self.to_3kilo
+		end
+	end
+	
+	def to_3kilo
+		rescaled_self = self.to_f / 1000.to_f
+		if (rescaled_self < 9.995)
+			precision = 2
+		elsif (rescaled_self < 99.95)
+			precision = 1
+		else
+			precision = 0
+		end
+		value = "%.#{precision}f" % rescaled_self 
+		unit = 'k'
+		return "#{value}#{unit}"
 	end
 
 end
