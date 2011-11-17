@@ -1,14 +1,14 @@
 #
-# To_3e.
+# To_SI.
 # Copyright © 2011 Filip van Laenen <f.a.vanlaenen@ieee.org>
 #
-# This file is part of to_3e.
+# This file is part of To_SI.
 #
-# To_3e is free software: you can redistribute it and/or modify it under the terms of the GNU
+# To_SI is free software: you can redistribute it and/or modify it under the terms of the GNU
 # General Public License as published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 # 
-# To_3e is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+# To_SI is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 # the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
 # Public License for more details.
 # 
@@ -91,8 +91,8 @@ end
 
 desc "Mutation testing with Heckle"
 task :heckle => "heckle:clean" do
-	Heckle.new('To3e').defined_in('to_3e.rb') \
-					  .tested_by('to_3e_unit_test.rb') \
+	Heckle.new('ToSI').defined_in('to_si.rb') \
+					  .tested_by('to_si_unit_test.rb') \
 					  .skip("_dump") \
 					  .heckle
 end
