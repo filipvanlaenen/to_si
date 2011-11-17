@@ -1,14 +1,14 @@
 #
-# To_3e.
+# To_SI.
 # Copyright © 2011 Filip van Laenen <f.a.vanlaenen@ieee.org>
 #
-# This file is part of to_3e.
+# This file is part of To_SI.
 #
-# To_3e is free software: you can redistribute it and/or modify it under the terms of the GNU
+# To_SI is free software: you can redistribute it and/or modify it under the terms of the GNU
 # General Public License as published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 # 
-# To_3e is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+# To_SI is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
 # the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
 # Public License for more details.
 # 
@@ -17,24 +17,24 @@
 
 require 'singleton'
 
-class To3e
+class ToSI
 
 	include Singleton
 	
 	Units = ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
 
-	def to_3e(number)
+	def to_si(number)
 		if (number < 1000)
 			return number.to_s
 		else
-			return to_3e_with_unit(number)
+			return to_si_with_unit(number)
 		end
 	end
 	
-	def to_3e_with_unit(number)
+	def to_si_with_unit(number)
 		scale = 0
 		rescaled_number = number.to_f
-		until (rescaled_number < 999.5) do
+		until (scale >= Units.length || rescaled_number < 999.5) do
 			rescaled_number = rescaled_number / 1000.to_f
 			scale += 1
 		end
@@ -58,8 +58,8 @@ end
 
 class Integer
 
-	def to_3e
-		To3e.instance.to_3e(self)
+	def to_si
+		ToSI.instance.to_si(self)
 	end
 	
 end
