@@ -166,7 +166,7 @@ class Heckle
 			i += 1
 			puts " o #{@classname}##{method} [#{i}/#{methods.length}]"
 			heckle_log = "qa/heckle-#{@classname}##{method}.log"
-			cmd = "heckle #{@classname} #{method} -t #{@testfile} -F > #{heckle_log}"
+			cmd = "heckle #{@classname} #{method} -t #{@testfile} -F -v > #{heckle_log}"
 			system(cmd)
 			result = read_file(heckle_log)
 			while (result.include?("Mutation caused a syntax error:")) do
